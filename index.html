@@ -1,0 +1,944 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Yuke — Global Digital Marketing, Social Media and Creative Portfolio">
+<title>Yuke® — Creative Portfolio</title>
+
+<style>
+:root {
+  --black: #171717;
+  --white: #f8f8f5;
+  --gray: #888;
+  --line: #d9d9d4;
+  --page: #f4f4f0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--page);
+  color: var(--black);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: #c8e5a0;
+  color: #171717;
+}
+
+/* NAVIGATION */
+
+.nav {
+  height: 76px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+
+.logo span {
+  font-weight: 400;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.nav-right a {
+  transition: opacity .2s;
+}
+
+.nav-right a:hover {
+  opacity: .4;
+}
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #83a957;
+}
+
+/* HERO */
+
+.hero {
+  padding: 100px 5% 65px;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.hero h1 {
+  margin-top: 65px;
+  font-size: clamp(64px, 12.5vw, 174px);
+  line-height: .78;
+  letter-spacing: -.105em;
+  font-weight: 800;
+}
+
+.hero h1 .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--black);
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 65px;
+  gap: 30px;
+}
+
+.hero-description {
+  max-width: 450px;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.hero-note {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: right;
+  color: #666;
+}
+
+/* COMMON */
+
+.section {
+  padding: 90px 5%;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--black);
+  margin-bottom: 35px;
+}
+
+.section-index {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #777;
+}
+
+.section-title {
+  font-size: clamp(35px, 5.5vw, 72px);
+  letter-spacing: -.065em;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.section-side {
+  font-size: 11px;
+  color: #777;
+  text-align: right;
+}
+
+/* FEATURED WORK */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 45px 22px;
+  align-items: start;
+}
+
+.project:nth-child(2) {
+  margin-top: 110px;
+}
+
+.project:nth-child(3) {
+  margin-top: -30px;
+}
+
+.project:nth-child(4) {
+  margin-top: 70px;
+}
+
+.project-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e3e3df;
+}
+
+.project-image.tall {
+  aspect-ratio: 4 / 5;
+}
+
+.project-image.dark {
+  background: #252525;
+  color: white;
+}
+
+.project-image.green {
+  background: #d7e5b7;
+}
+
+.project-image.blue {
+  background: #d1dff0;
+}
+
+.project-image.red {
+  background: #e8b9a9;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+
+.project:hover .project-image img {
+  transform: scale(1.035);
+}
+
+.placeholder {
+  text-align: center;
+  padding: 25px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: .6;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+  gap: 15px;
+}
+
+.project-title {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -.5px;
+}
+
+.project-category {
+  font-size: 11px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.project-number {
+  font-size: 11px;
+  color: #888;
+}
+
+/* RESULTS */
+
+.results {
+  background: #191919;
+  color: white;
+}
+
+.results .section-header {
+  border-color: #555;
+}
+
+.results .section-index,
+.results .section-side {
+  color: #aaa;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.result {
+  border-top: 1px solid #555;
+  padding-top: 20px;
+}
+
+.result-number {
+  font-size: clamp(35px, 5vw, 65px);
+  letter-spacing: -4px;
+  font-weight: 700;
+}
+
+.result-label {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* EXPERTISE */
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+}
+
+.expertise {
+  padding: 30px 22px 30px 0;
+  border-right: 1px solid var(--line);
+}
+
+.expertise:not(:first-child) {
+  padding-left: 22px;
+}
+
+.expertise:last-child {
+  border-right: 0;
+}
+
+.expertise-num {
+  font-size: 11px;
+  color: #888;
+}
+
+.expertise h3 {
+  font-size: 25px;
+  margin: 65px 0 15px;
+  letter-spacing: -1px;
+}
+
+.expertise p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #666;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 22px;
+}
+
+.tags span {
+  border: 1px solid #ccc;
+  padding: 6px 9px;
+  font-size: 10px;
+}
+
+/* CREATIVE LAB */
+
+.lab {
+  background: #e8e8e3;
+}
+
+.lab-intro {
+  max-width: 470px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 35px;
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.lab-item {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  overflow: hidden;
+}
+
+.lab-item:nth-child(1) { background: #e9b5a4; }
+.lab-item:nth-child(2) { background: #c6d7b3; }
+.lab-item:nth-child(3) { background: #c4d2e9; }
+.lab-item:nth-child(4) { background: #252525; color: white; }
+.lab-item:nth-child(5) { background: #e9d77d; }
+.lab-item:nth-child(6) { background: #d5bde1; }
+
+/* ABOUT */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+
+.about-heading {
+  font-size: clamp(40px, 6vw, 78px);
+  line-height: .98;
+  letter-spacing: -.07em;
+}
+
+.about-copy {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.9;
+}
+
+.about-copy p {
+  margin-bottom: 22px;
+}
+
+.about-details {
+  margin-top: 35px;
+  border-top: 1px solid var(--line);
+}
+
+.about-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.about-row span:first-child {
+  color: #888;
+}
+
+/* CONTACT */
+
+.contact {
+  background: #191919;
+  color: white;
+  padding: 100px 5%;
+}
+
+.contact h2 {
+  font-size: clamp(55px, 11vw, 140px);
+  line-height: .9;
+  letter-spacing: -.09em;
+  margin: 45px 0;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 25px;
+}
+
+.contact-info p {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.contact-link {
+  display: inline-block;
+  border: 1px solid #777;
+  padding: 15px 22px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  transition: .2s;
+}
+
+.contact-link:hover {
+  background: white;
+  color: black;
+}
+
+footer {
+  background: #191919;
+  color: #888;
+  padding: 25px 5%;
+  border-top: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 700px) {
+  .nav {
+    height: 65px;
+    padding: 0 5%;
+  }
+
+  .nav-right {
+    gap: 12px;
+    font-size: 9px;
+  }
+
+  .nav-status {
+    display: none;
+  }
+
+  .hero {
+    padding: 75px 5% 55px;
+  }
+
+  .hero h1 {
+    font-size: 19vw;
+    margin-top: 55px;
+  }
+
+  .hero-bottom {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .hero-note {
+    text-align: left;
+  }
+
+  .section {
+    padding: 65px 5%;
+  }
+
+  .section-header {
+    align-items: start;
+  }
+
+  .section-side {
+    max-width: 110px;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .project:nth-child(n) {
+    margin-top: 0;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 18px;
+  }
+
+  .expertise-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .expertise,
+  .expertise:not(:first-child) {
+    padding: 25px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .expertise h3 {
+    margin-top: 30px;
+  }
+
+  .lab-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .contact {
+    padding: 75px 5%;
+  }
+
+  .contact-info {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav class="nav">
+  <a href="#" class="logo">YUKE<span>®</span></a>
+
+  <div class="nav-right">
+    <a href="#work">WORK</a>
+    <a href="#expertise">EXPERTISE</a>
+    <a href="#about">ABOUT</a>
+    <a href="#contact">CONTACT</a>
+    <div class="nav-status">
+      <span class="dot"></span>
+      <span>PORTFOLIO 2026</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<header class="hero">
+  <div class="hero-top">
+    <span>Independent Creative Portfolio</span>
+    <span>Based in Shenzhen / Working Globally</span>
+  </div>
+
+  <h1>
+    IDEAS<br>
+    INTO <span class="outline">IMPACT.</span>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-description">
+      I'm Yuke, a digital marketing professional
+      working across social media, paid advertising
+      and creative communication for global brands.
+    </p>
+
+    <div class="hero-note">
+      STRATEGY / CONTENT / CREATIVE<br>
+      SCROLL TO EXPLORE ↓
+    </div>
+  </div>
+</header>
+
+<!-- SELECTED WORK -->
+
+<section class="section" id="work">
+
+  <div class="section-header">
+    <div>
+      <div class="section-index">01 / SELECTED WORK</div>
+      <h2 class="section-title">A collection of work.</h2>
+    </div>
+    <div class="section-side">2024 — 2026<br>GLOBAL MARKETING</div>
+  </div>
+
+  <div class="work-grid">
+
+    <article class="project">
+      <div class="project-image dark">
+        <div class="placeholder">
+          SOCIAL MEDIA CAMPAIGN<br>
+          REPLACE WITH YOUR IMAGE
+        </div>
+      </div>
+      <div class="project-meta">
+        <div>
+          <h3 class="project-title">Building Social Presence</h3>
+          <p class="project-category">SOCIAL MEDIA / BRAND GROWTH</p>
+        </div>
+        <span class="project-number">01</span>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-image green">
+        <div class="placeholder">
+          PAID MEDIA CAMPAIGN<br>
+          REPLACE WITH YOUR IMAGE
+        </div>
+      </div>
+      <div class="project-meta">
+        <div>
+          <h3 class="project-title">Performance in Motion</h3>
+          <p class="project-category">PAID ADVERTISING / ANALYTICS</p>
+        </div>
+        <span class="project-number">02</span>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-image blue">
+        <div class="placeholder">
+          CREATIVE VISUAL<br>
+          REPLACE WITH YOUR IMAGE
+        </div>
+      </div>
+      <div class="project-meta">
+        <div>
+          <h3 class="project-title">Visual Communication</h3>
+          <p class="project-category">ART DIRECTION / DESIGN</p>
+        </div>
+        <span class="project-number">03</span>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-image red">
+        <div class="placeholder">
+          VIDEO CONTENT<br>
+          REPLACE WITH YOUR IMAGE
+        </div>
+      </div>
+      <div class="project-meta">
+        <div>
+          <h3 class="project-title">Stories in Motion</h3>
+          <p class="project-category">VIDEO / CONTENT CREATION</p>
+        </div>
+        <span class="project-number">04</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- RESULTS -->
+
+<section class="section results">
+  <div class="section-header">
+    <div>
+      <div class="section-index">02 / NUMBERS & IMPACT</div>
+      <h2 class="section-title">Growth, measured.</h2>
+    </div>
+    <div class="section-side">SELECTED ACCOUNT<br>ACHIEVEMENTS</div>
+  </div>
+
+  <div class="result-grid">
+    <div class="result">
+      <div class="result-number">340K+</div>
+      <div class="result-label">X followers<br>account growth</div>
+    </div>
+
+    <div class="result">
+      <div class="result-number">136K+</div>
+      <div class="result-label">Facebook followers<br>account growth</div>
+    </div>
+
+    <div class="result">
+      <div class="result-number">80K+</div>
+      <div class="result-label">TikTok followers<br>account growth</div>
+    </div>
+
+    <div class="result">
+      <div class="result-number">1M+</div>
+      <div class="result-label">TikTok video views<br>viral content performance</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+
+<section class="section" id="expertise">
+  <div class="section-header">
+    <div>
+      <div class="section-index">03 / WHAT I DO</div>
+      <h2 class="section-title">Areas of expertise.</h2>
+    </div>
+    <div class="section-side">STRATEGY MEETS<br>EXECUTION</div>
+  </div>
+
+  <div class="expertise-grid">
+
+    <div class="expertise">
+      <div class="expertise-num">01 — SOCIAL</div>
+      <h3>Social Media<br>Management</h3>
+      <p>
+        Developing social strategies, managing global
+        channels, creating engaging content and
+        building online communities.
+      </p>
+      <div class="tags">
+        <span>TikTok</span>
+        <span>Instagram</span>
+        <span>Facebook</span>
+        <span>X</span>
+        <span>LinkedIn</span>
+      </div>
+    </div>
+
+    <div class="expertise">
+      <div class="expertise-num">02 — PERFORMANCE</div>
+      <h3>Paid Media<br>Advertising</h3>
+      <p>
+        Planning and optimizing advertising campaigns
+        with a focus on audience growth, awareness
+        and cost efficiency.
+      </p>
+      <div class="tags">
+        <span>Meta Ads</span>
+        <span>TikTok Ads</span>
+        <span>Media Planning</span>
+        <span>Analytics</span>
+      </div>
+    </div>
+
+    <div class="expertise">
+      <div class="expertise-num">03 — CREATIVE</div>
+      <h3>Creative<br>Communication</h3>
+      <p>
+        Translating product features and brand
+        messages into visual stories and engaging
+        digital experiences.
+      </p>
+      <div class="tags">
+        <span>Visual Design</span>
+        <span>Video</span>
+        <span>Copywriting</span>
+        <span>Campaigns</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CREATIVE LAB -->
+
+<section class="section lab">
+  <div class="section-header">
+    <div>
+      <div class="section-index">04 / CREATIVE LAB</div>
+      <h2 class="section-title">Ideas without limits.</h2>
+    </div>
+    <div class="section-side">EXPERIMENTS / CONCEPTS<br>VISUAL EXPLORATIONS</div>
+  </div>
+
+  <p class="lab-intro">
+    A playground for visual ideas, campaign concepts,
+    social media experiments and creative explorations.
+    Not everything needs a brief.
+  </p>
+
+  <div class="lab-grid">
+    <div class="lab-item">POSTER DESIGN<br>01</div>
+    <div class="lab-item">SOCIAL CONCEPT<br>02</div>
+    <div class="lab-item">VISUAL EXPERIMENT<br>03</div>
+    <div class="lab-item">VIDEO IDEAS<br>04</div>
+    <div class="lab-item">CAMPAIGN CONCEPT<br>05</div>
+    <div class="lab-item">JUST FOR FUN<br>06</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section class="section" id="about">
+  <div class="about-grid">
+
+    <div>
+      <div class="section-index">05 / A LITTLE ABOUT ME</div>
+      <h2 class="about-heading">
+        Curious<br>
+        by nature.<br>
+        Creative<br>
+        by design.
+      </h2>
+    </div>
+
+    <div class="about-copy">
+      <p>
+        Hi, I'm Yuke. A digital marketing professional
+        with a background in English translation and
+        international brand communication.
+      </p>
+
+      <p>
+        My experience spans global social media
+        management, paid media campaigns, content
+        development and creative production.
+      </p>
+
+      <p>
+        I enjoy connecting strategy with creativity,
+        understanding audiences across markets and
+        turning ideas into meaningful results.
+      </p>
+
+      <div class="about-details">
+        <div class="about-row">
+          <span>FOCUS</span>
+          <span>GLOBAL DIGITAL MARKETING</span>
+        </div>
+        <div class="about-row">
+          <span>LANGUAGE</span>
+          <span>CHINESE / ENGLISH</span>
+        </div>
+        <div class="about-row">
+          <span>INTERESTS</span>
+          <span>TECH / DESIGN / CULTURE</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+  <div class="section-index">06 / GET IN TOUCH</div>
+
+  <h2>
+    LET'S MAKE<br>
+    SOMETHING<br>
+    MATTER.
+  </h2>
+
+  <div class="contact-info">
+    <p>
+      Interested in working together?<br>
+      I'd love to hear from you.
+    </p>
+
+    <!-- Replace with your real email -->
+    <a class="contact-link"
+       href="mailto:YOUR_EMAIL@example.com">
+      SAY HELLO ↗
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 YUKE®</span>
+  <span>INDEPENDENT DIGITAL MARKETING PORTFOLIO</span>
+  <span>MADE WITH INTENTION.</span>
+</footer>
+
+</body>
+</html>
