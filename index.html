@@ -4,33 +4,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Yuke — Global Digital Marketing, Social Media and Creative Portfolio">
-<title>Yuke® — Creative Portfolio</title>
+<meta name="description" content=" Yolk — Global Digital Marketing, Social Media and Creative Portfolio">
+<title>Yolk® — Creative Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --black: #171717;
-  --white: #f8f8f5;
-  --gray: #888;
-  --line: #d9d9d4;
-  --page: #f4f4f0;
+  --ink: #171714;
+  --paper: #f5f4ef;
+  --muted: #77776f;
+  --line: #d8d7cf;
+  --sans: "DM Sans", Arial, sans-serif;
+  --display: "Manrope", "DM Sans", sans-serif;
+  --mono: "DM Mono", monospace;
+  --gutter: clamp(22px, 5vw, 76px);
 }
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
-  background: var(--page);
-  color: var(--black);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 a {
@@ -40,27 +51,32 @@ a {
 
 button {
   font: inherit;
+  color: inherit;
 }
 
 ::selection {
-  background: #c8e5a0;
-  color: #171717;
+  background: #c9df9f;
+  color: var(--ink);
 }
 
 /* NAVIGATION */
 
 .nav {
   height: 76px;
-  padding: 0 5%;
+  padding: 0 var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(245,244,239,.92);
+  backdrop-filter: blur(14px);
 }
 
 .logo {
-  font-size: 23px;
-  font-weight: 900;
+  font: 800 22px var(--display);
   letter-spacing: -1.5px;
 }
 
@@ -71,10 +87,9 @@ button {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 28px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  gap: clamp(14px,2.5vw,34px);
+  font: 11px var(--mono);
+  letter-spacing: .08em;
 }
 
 .nav-right a {
@@ -82,13 +97,14 @@ button {
 }
 
 .nav-right a:hover {
-  opacity: .4;
+  opacity: .45;
 }
 
 .nav-status {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
+  color: var(--muted);
 }
 
 .dot {
@@ -96,243 +112,313 @@ button {
   height: 7px;
   border-radius: 50%;
   background: #83a957;
+  box-shadow: 0 0 0 4px #83a95720;
+}
+
+.menu-toggle {
+  display: none;
+  border: 0;
+  background: none;
+  font: 11px var(--mono);
+  letter-spacing: .08em;
+  cursor: pointer;
 }
 
 /* HERO */
 
 .hero {
-  padding: 100px 5% 65px;
+  padding: clamp(70px,10vw,145px) var(--gutter) 80px;
+}
+
+.eyebrow,
+.section-index,
+.section-side,
+.project-category,
+.project-number,
+.hero-note,
+.contact-kicker,
+footer,
+.tag,
+.modal-kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
 }
 
 .hero-top {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #666;
+  gap: 20px;
+  color: var(--muted);
 }
 
 .hero h1 {
-  margin-top: 65px;
-  font-size: clamp(64px, 12.5vw, 174px);
-  line-height: .78;
+  font: 800 clamp(68px,13.2vw,190px)/.79 var(--display);
   letter-spacing: -.105em;
-  font-weight: 800;
+  margin: clamp(50px,7vw,95px) 0 0;
 }
 
 .hero h1 .outline {
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--black);
+  -webkit-text-stroke: 1.4px var(--ink);
 }
 
 .hero-bottom {
   display: flex;
   justify-content: space-between;
-  align-items: end;
-  margin-top: 65px;
+  align-items: flex-end;
   gap: 30px;
+  margin-top: clamp(55px,8vw,105px);
 }
 
 .hero-description {
-  max-width: 450px;
-  font-size: 16px;
-  line-height: 1.65;
+  max-width: 480px;
+  font-size: clamp(15px,1.3vw,18px);
+  line-height: 1.75;
+  color: #55554f;
 }
 
 .hero-note {
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   text-align: right;
-  color: #666;
+  line-height: 1.9;
+  color: var(--muted);
 }
 
-/* COMMON */
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+  font: 10px var(--mono);
+  letter-spacing: .1em;
+}
+
+.scroll-cue span {
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: currentColor;
+  transition: width .25s;
+}
+
+.scroll-cue:hover span {
+  width: 58px;
+}
+
+/* COMMON SECTIONS */
 
 .section {
-  padding: 90px 5%;
+  padding: clamp(68px,8vw,112px) var(--gutter);
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
-  align-items: end;
-  padding-bottom: 25px;
-  border-bottom: 1px solid var(--black);
-  margin-bottom: 35px;
+  align-items: flex-end;
+  gap: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 36px;
 }
 
 .section-index {
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  color: #777;
+  color: var(--muted);
+  margin-bottom: 13px;
 }
 
 .section-title {
-  font-size: clamp(35px, 5.5vw, 72px);
-  letter-spacing: -.065em;
-  line-height: 1;
-  font-weight: 700;
+  font: 700 clamp(34px,5.6vw,76px)/.98 var(--display);
+  letter-spacing: -.075em;
 }
 
 .section-side {
-  font-size: 11px;
-  color: #777;
   text-align: right;
+  color: var(--muted);
+  line-height: 1.8;
 }
 
-/* FEATURED WORK */
+/* SELECTED WORK */
 
 .work-grid {
   display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 45px 22px;
+  grid-template-columns: 1.12fr .88fr;
+  gap: clamp(28px,5vw,72px) 22px;
   align-items: start;
 }
 
 .project:nth-child(2) {
-  margin-top: 110px;
+  margin-top: 100px;
 }
 
 .project:nth-child(3) {
-  margin-top: -30px;
+  margin-top: -35px;
 }
 
 .project:nth-child(4) {
-  margin-top: 70px;
+  margin-top: 60px;
+}
+
+.project {
+  min-width: 0;
+  cursor: pointer;
+  outline: none;
 }
 
 .project-image {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
+  min-height: 240px;
+  aspect-ratio: 4/3;
   position: relative;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background: #e3e3df;
+  justify-content: center;
+  background: #deded6;
+  isolation: isolate;
 }
 
 .project-image.tall {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4/5;
 }
 
 .project-image.dark {
-  background: #252525;
+  background: #242421;
   color: white;
 }
 
 .project-image.green {
-  background: #d7e5b7;
+  background: #d9e4c6;
 }
 
 .project-image.blue {
-  background: #d1dff0;
+  background: #d6dfed;
 }
 
-.project-image.red {
-  background: #e8b9a9;
+.project-image.rose {
+  background: #e8c8bd;
 }
 
-.project-image img {
+.project-image .placeholder {
+  padding: 24px;
+  text-align: center;
+  font: 10px/1.9 var(--mono);
+  letter-spacing: .12em;
+  opacity: .7;
+  transition: transform .5s, opacity .3s;
+}
+
+.project-image:after {
+  content: "VIEW PROJECT ↗";
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  padding: 10px 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 9px var(--mono);
+  letter-spacing: .08em;
+  transform: translateY(55px);
+  opacity: 0;
+  transition: transform .3s, opacity .3s;
+}
+
+.project:hover .project-image:after,
+.project:focus-visible .project-image:after {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.project:hover .placeholder {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.project-image img,
+.project-image video {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform .6s cubic-bezier(.2,.7,.2,1);
-}
-
-.project:hover .project-image img {
-  transform: scale(1.035);
-}
-
-.placeholder {
-  text-align: center;
-  padding: 25px;
-  font-size: 11px;
-  letter-spacing: 2px;
-  opacity: .6;
+  position: absolute;
+  inset: 0;
 }
 
 .project-meta {
   display: flex;
   justify-content: space-between;
+  gap: 16px;
   padding-top: 15px;
-  gap: 15px;
 }
 
 .project-title {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -.5px;
+  font: 600 clamp(17px,1.6vw,21px) var(--display);
+  letter-spacing: -.04em;
 }
 
 .project-category {
-  font-size: 11px;
-  color: #777;
-  margin-top: 5px;
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 7px;
 }
 
 .project-number {
-  font-size: 11px;
-  color: #888;
+  color: var(--muted);
 }
 
 /* RESULTS */
 
 .results {
-  background: #191919;
-  color: white;
+  background: #1d1d1a;
+  color: #f5f4ef;
 }
 
 .results .section-header {
-  border-color: #555;
+  border-color: #5a5a53;
 }
 
 .results .section-index,
 .results .section-side {
-  color: #aaa;
+  color: #aaa99f;
 }
 
 .result-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(4,1fr);
+  gap: 24px;
 }
 
 .result {
-  border-top: 1px solid #555;
-  padding-top: 20px;
+  border-top: 1px solid #5a5a53;
+  padding-top: 18px;
 }
 
 .result-number {
-  font-size: clamp(35px, 5vw, 65px);
-  letter-spacing: -4px;
-  font-weight: 700;
+  font: 700 clamp(38px,5.4vw,70px)/1 var(--display);
+  letter-spacing: -.08em;
 }
 
 .result-label {
-  color: #aaa;
   font-size: 12px;
-  line-height: 1.6;
-  margin-top: 10px;
+  line-height: 1.7;
+  color: #aaa99f;
+  margin-top: 13px;
 }
 
 /* EXPERTISE */
 
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3,1fr);
   border-top: 1px solid var(--line);
 }
 
 .expertise {
-  padding: 30px 22px 30px 0;
+  padding: 28px 24px 28px 0;
   border-right: 1px solid var(--line);
 }
 
 .expertise:not(:first-child) {
-  padding-left: 22px;
+  padding-left: 24px;
 }
 
 .expertise:last-child {
@@ -340,20 +426,21 @@ button {
 }
 
 .expertise-num {
-  font-size: 11px;
-  color: #888;
+  font: 10px var(--mono);
+  color: var(--muted);
 }
 
 .expertise h3 {
-  font-size: 25px;
-  margin: 65px 0 15px;
-  letter-spacing: -1px;
+  font: 650 clamp(22px,2.5vw,32px)/1.08 var(--display);
+  letter-spacing: -.06em;
+  margin: 60px 0 16px;
 }
 
 .expertise p {
   font-size: 13px;
-  line-height: 1.8;
-  color: #666;
+  line-height: 1.85;
+  color: #66665f;
+  max-width: 330px;
 }
 
 .tags {
@@ -363,48 +450,55 @@ button {
   margin-top: 22px;
 }
 
-.tags span {
-  border: 1px solid #ccc;
-  padding: 6px 9px;
-  font-size: 10px;
+.tag {
+  border: 1px solid #c9c8c0;
+  padding: 7px 9px;
+  font-size: 9px;
+  letter-spacing: .04em;
 }
 
 /* CREATIVE LAB */
 
 .lab {
-  background: #e8e8e3;
+  background: #e9e8e1;
 }
 
 .lab-intro {
-  max-width: 470px;
+  max-width: 500px;
   font-size: 14px;
-  line-height: 1.8;
-  color: #666;
-  margin-bottom: 35px;
+  line-height: 1.85;
+  color: #66665f;
+  margin: -5px 0 34px;
 }
 
 .lab-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
 }
 
 .lab-item {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1/1;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 20px;
-  font-size: 11px;
-  letter-spacing: 1.5px;
+  font: 10px/1.8 var(--mono);
+  letter-spacing: .1em;
   overflow: hidden;
+  position: relative;
+  transition: transform .35s;
+}
+
+.lab-item:hover {
+  transform: translateY(-7px) rotate(-1deg);
 }
 
 .lab-item:nth-child(1) { background: #e9b5a4; }
 .lab-item:nth-child(2) { background: #c6d7b3; }
 .lab-item:nth-child(3) { background: #c4d2e9; }
-.lab-item:nth-child(4) { background: #252525; color: white; }
+.lab-item:nth-child(4) { background: #252522; color: white; }
 .lab-item:nth-child(5) { background: #e9d77d; }
 .lab-item:nth-child(6) { background: #d5bde1; }
 
@@ -413,123 +507,227 @@ button {
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 70px;
+  gap: clamp(35px,8vw,110px);
 }
 
 .about-heading {
-  font-size: clamp(40px, 6vw, 78px);
-  line-height: .98;
-  letter-spacing: -.07em;
+  font: 700 clamp(42px,6.5vw,88px)/.94 var(--display);
+  letter-spacing: -.08em;
+  margin-top: 18px;
 }
 
 .about-copy {
-  font-size: 15px;
-  color: #666;
+  font-size: 14px;
   line-height: 1.9;
+  color: #62625b;
+  padding-top: 35px;
 }
 
 .about-copy p {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .about-details {
-  margin-top: 35px;
+  margin-top: 34px;
   border-top: 1px solid var(--line);
 }
 
 .about-row {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
   padding: 13px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 12px;
+  font: 10px var(--mono);
+  letter-spacing: .04em;
 }
 
 .about-row span:first-child {
-  color: #888;
+  color: var(--muted);
 }
 
 /* CONTACT */
 
 .contact {
-  background: #191919;
-  color: white;
-  padding: 100px 5%;
+  background: #1d1d1a;
+  color: var(--paper);
+  padding: clamp(75px,10vw,135px) var(--gutter);
+}
+
+.contact-kicker {
+  color: #aaa99f;
 }
 
 .contact h2 {
-  font-size: clamp(55px, 11vw, 140px);
-  line-height: .9;
-  letter-spacing: -.09em;
-  margin: 45px 0;
+  font: 800 clamp(58px,11vw,150px)/.86 var(--display);
+  letter-spacing: -.095em;
+  margin: 48px 0;
 }
 
 .contact-info {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
   gap: 25px;
 }
 
 .contact-info p {
   font-size: 13px;
-  color: #aaa;
+  line-height: 1.8;
+  color: #aaa99f;
 }
 
 .contact-link {
-  display: inline-block;
-  border: 1px solid #777;
-  padding: 15px 22px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  transition: .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid #77776f;
+  padding: 15px 20px;
+  font: 10px var(--mono);
+  letter-spacing: .1em;
+  transition: background .25s, color .25s;
 }
 
 .contact-link:hover {
-  background: white;
-  color: black;
+  background: var(--paper);
+  color: var(--ink);
 }
 
 footer {
-  background: #191919;
-  color: #888;
-  padding: 25px 5%;
-  border-top: 1px solid #444;
+  background: #1d1d1a;
+  color: #85857c;
+  border-top: 1px solid #44443e;
+  padding: 22px var(--gutter);
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
-  letter-spacing: 1px;
+  gap: 15px;
+  font-size: 9px;
 }
 
-/* RESPONSIVE */
+/* SCROLL ANIMATION */
 
-@media(max-width: 700px) {
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* PROJECT POPUP */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(20,20,18,.72);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-panel {
+  width: min(720px,100%);
+  max-height: 88vh;
+  overflow: auto;
+  background: var(--paper);
+  padding: clamp(24px,5vw,48px);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  border: 1px solid var(--line);
+  background: transparent;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.modal-kicker {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.modal-title {
+  font: 700 clamp(30px,5vw,54px)/1 var(--display);
+  letter-spacing: -.07em;
+  max-width: 85%;
+}
+
+.modal-copy {
+  font-size: 14px;
+  line-height: 1.85;
+  color: #62625b;
+  margin-top: 22px;
+  max-width: 570px;
+}
+
+.modal-hint {
+  font: 10px var(--mono);
+  color: var(--muted);
+  margin-top: 28px;
+}
+
+/* MOBILE */
+
+@media(max-width:760px) {
   .nav {
-    height: 65px;
-    padding: 0 5%;
+    height: 66px;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 
   .nav-right {
-    gap: 12px;
-    font-size: 9px;
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    padding: 22px var(--gutter);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
   }
 
-  .nav-status {
-    display: none;
+  .nav-right.open {
+    display: flex;
   }
 
   .hero {
-    padding: 75px 5% 55px;
+    padding-top: 75px;
+  }
+
+  .hero-top {
+    font-size: 9px;
   }
 
   .hero h1 {
-    font-size: 19vw;
-    margin-top: 55px;
+    font-size: 18vw;
+    letter-spacing: -.1em;
+    margin-top: 58px;
   }
 
   .hero-bottom {
+    align-items: flex-start;
     flex-direction: column;
-    align-items: start;
+    margin-top: 55px;
   }
 
   .hero-note {
@@ -537,29 +735,35 @@ footer {
   }
 
   .section {
-    padding: 65px 5%;
+    padding-top: 68px;
+    padding-bottom: 68px;
   }
 
   .section-header {
-    align-items: start;
+    align-items: flex-start;
   }
 
   .section-side {
-    max-width: 110px;
+    max-width: 120px;
+    font-size: 9px;
   }
 
   .work-grid {
     grid-template-columns: 1fr;
-    gap: 35px;
+    gap: 34px;
   }
 
   .project:nth-child(n) {
     margin-top: 0;
   }
 
+  .project-image {
+    min-height: 220px;
+  }
+
   .result-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 35px 18px;
+    gap: 30px 18px;
   }
 
   .expertise-grid {
@@ -574,30 +778,52 @@ footer {
   }
 
   .expertise h3 {
-    margin-top: 30px;
+    margin: 28px 0 14px;
   }
 
   .lab-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 35px;
+    gap: 25px;
   }
 
-  .contact {
-    padding: 75px 5%;
+  .about-copy {
+    padding-top: 0;
   }
 
   .contact-info {
-    align-items: start;
+    align-items: flex-start;
     flex-direction: column;
+  }
+
+  .contact h2 {
+    font-size: 17vw;
   }
 
   footer {
     flex-direction: column;
-    gap: 10px;
+    line-height: 1.7;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  * {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
   }
 }
 </style>
@@ -605,12 +831,13 @@ footer {
 
 <body>
 
-<!-- NAVIGATION -->
-
 <nav class="nav">
-  <a href="#" class="logo">YUKE<span>®</span></a>
+  <a href="#" class="logo">Yolk<span>®</span></a>
 
-  <div class="nav-right">
+  <button class="menu-toggle" id="menuToggle"
+    aria-expanded="false" aria-controls="navLinks">MENU +</button>
+
+  <div class="nav-right" id="navLinks">
     <a href="#work">WORK</a>
     <a href="#expertise">EXPERTISE</a>
     <a href="#about">ABOUT</a>
@@ -622,10 +849,8 @@ footer {
   </div>
 </nav>
 
-<!-- HERO -->
-
 <header class="hero">
-  <div class="hero-top">
+  <div class="hero-top eyebrow">
     <span>Independent Creative Portfolio</span>
     <span>Based in Shenzhen / Working Globally</span>
   </div>
@@ -637,22 +862,18 @@ footer {
 
   <div class="hero-bottom">
     <p class="hero-description">
-      I'm Yuke, a digital marketing professional
-      working across social media, paid advertising
-      and creative communication for global brands.
+      I'm Yolk, a digital marketing professional working across social media,
+      paid advertising and creative communication for global brands.
     </p>
 
-    <div class="hero-note">
-      STRATEGY / CONTENT / CREATIVE<br>
-      SCROLL TO EXPLORE ↓
+    <div>
+      <div class="hero-note">STRATEGY / CONTENT / CREATIVE</div>
+      <a class="scroll-cue" href="#work"><span></span> SCROLL TO EXPLORE ↓</a>
     </div>
   </div>
 </header>
 
-<!-- SELECTED WORK -->
-
 <section class="section" id="work">
-
   <div class="section-header">
     <div>
       <div class="section-index">01 / SELECTED WORK</div>
@@ -663,12 +884,12 @@ footer {
 
   <div class="work-grid">
 
-    <article class="project">
+    <article class="project reveal" tabindex="0" role="button"
+      data-title="Building Social Presence"
+      data-category="SOCIAL MEDIA / BRAND GROWTH"
+      data-copy="A closer look at social media strategy, channel operations, content planning and community growth. Add selected campaign visuals, account snapshots and a concise explanation of your individual contribution here.">
       <div class="project-image dark">
-        <div class="placeholder">
-          SOCIAL MEDIA CAMPAIGN<br>
-          REPLACE WITH YOUR IMAGE
-        </div>
+        <div class="placeholder">SOCIAL MEDIA CAMPAIGN<br>ADD YOUR IMAGE OR VIDEO</div>
       </div>
       <div class="project-meta">
         <div>
@@ -679,12 +900,12 @@ footer {
       </div>
     </article>
 
-    <article class="project">
+    <article class="project reveal" tabindex="0" role="button"
+      data-title="Performance in Motion"
+      data-category="PAID ADVERTISING / ANALYTICS"
+      data-copy="Show how you planned, launched and optimized paid campaigns. Add selected platform screenshots, campaign objectives, budget context where shareable, and verified performance results.">
       <div class="project-image green">
-        <div class="placeholder">
-          PAID MEDIA CAMPAIGN<br>
-          REPLACE WITH YOUR IMAGE
-        </div>
+        <div class="placeholder">PAID MEDIA CAMPAIGN<br>ADD YOUR IMAGE OR VIDEO</div>
       </div>
       <div class="project-meta">
         <div>
@@ -695,12 +916,12 @@ footer {
       </div>
     </article>
 
-    <article class="project">
+    <article class="project reveal" tabindex="0" role="button"
+      data-title="Visual Communication"
+      data-category="ART DIRECTION / DESIGN"
+      data-copy="A selection of visual assets, campaign posters, product communication and brand materials. Use this space to explain the brief, your creative decisions and the parts you personally produced.">
       <div class="project-image blue">
-        <div class="placeholder">
-          CREATIVE VISUAL<br>
-          REPLACE WITH YOUR IMAGE
-        </div>
+        <div class="placeholder">CREATIVE VISUAL<br>ADD YOUR IMAGE OR VIDEO</div>
       </div>
       <div class="project-meta">
         <div>
@@ -711,12 +932,12 @@ footer {
       </div>
     </article>
 
-    <article class="project">
-      <div class="project-image red">
-        <div class="placeholder">
-          VIDEO CONTENT<br>
-          REPLACE WITH YOUR IMAGE
-        </div>
+    <article class="project reveal" tabindex="0" role="button"
+      data-title="Stories in Motion"
+      data-category="VIDEO / CONTENT CREATION"
+      data-copy="Feature short-form videos, product storytelling and social-first creative concepts. Include the objective, format, your role and any results that can be shared publicly.">
+      <div class="project-image rose">
+        <div class="placeholder">VIDEO CONTENT<br>ADD YOUR IMAGE OR VIDEO</div>
       </div>
       <div class="project-meta">
         <div>
@@ -730,8 +951,6 @@ footer {
   </div>
 </section>
 
-<!-- RESULTS -->
-
 <section class="section results">
   <div class="section-header">
     <div>
@@ -742,29 +961,24 @@ footer {
   </div>
 
   <div class="result-grid">
-    <div class="result">
+    <div class="result reveal">
       <div class="result-number">340K+</div>
       <div class="result-label">X followers<br>account growth</div>
     </div>
-
-    <div class="result">
+    <div class="result reveal">
       <div class="result-number">136K+</div>
       <div class="result-label">Facebook followers<br>account growth</div>
     </div>
-
-    <div class="result">
+    <div class="result reveal">
       <div class="result-number">80K+</div>
       <div class="result-label">TikTok followers<br>account growth</div>
     </div>
-
-    <div class="result">
+    <div class="result reveal">
       <div class="result-number">1M+</div>
       <div class="result-label">TikTok video views<br>viral content performance</div>
     </div>
   </div>
 </section>
-
-<!-- EXPERTISE -->
 
 <section class="section" id="expertise">
   <div class="section-header">
@@ -777,59 +991,54 @@ footer {
 
   <div class="expertise-grid">
 
-    <div class="expertise">
+    <div class="expertise reveal">
       <div class="expertise-num">01 — SOCIAL</div>
       <h3>Social Media<br>Management</h3>
       <p>
-        Developing social strategies, managing global
-        channels, creating engaging content and
-        building online communities.
+        Developing social strategies, managing global channels,
+        creating engaging content and building online communities.
       </p>
       <div class="tags">
-        <span>TikTok</span>
-        <span>Instagram</span>
-        <span>Facebook</span>
-        <span>X</span>
-        <span>LinkedIn</span>
+        <span class="tag">TikTok</span>
+        <span class="tag">Instagram</span>
+        <span class="tag">Facebook</span>
+        <span class="tag">X</span>
+        <span class="tag">LinkedIn</span>
       </div>
     </div>
 
-    <div class="expertise">
+    <div class="expertise reveal">
       <div class="expertise-num">02 — PERFORMANCE</div>
       <h3>Paid Media<br>Advertising</h3>
       <p>
-        Planning and optimizing advertising campaigns
-        with a focus on audience growth, awareness
-        and cost efficiency.
+        Planning and optimizing advertising campaigns with a focus
+        on audience growth, awareness and cost efficiency.
       </p>
       <div class="tags">
-        <span>Meta Ads</span>
-        <span>TikTok Ads</span>
-        <span>Media Planning</span>
-        <span>Analytics</span>
+        <span class="tag">Meta Ads</span>
+        <span class="tag">TikTok Ads</span>
+        <span class="tag">Media Planning</span>
+        <span class="tag">Analytics</span>
       </div>
     </div>
 
-    <div class="expertise">
+    <div class="expertise reveal">
       <div class="expertise-num">03 — CREATIVE</div>
       <h3>Creative<br>Communication</h3>
       <p>
-        Translating product features and brand
-        messages into visual stories and engaging
-        digital experiences.
+        Translating product features and brand messages into visual
+        stories and engaging digital experiences.
       </p>
       <div class="tags">
-        <span>Visual Design</span>
-        <span>Video</span>
-        <span>Copywriting</span>
-        <span>Campaigns</span>
+        <span class="tag">Visual Design</span>
+        <span class="tag">Video</span>
+        <span class="tag">Copywriting</span>
+        <span class="tag">Campaigns</span>
       </div>
     </div>
 
   </div>
 </section>
-
-<!-- CREATIVE LAB -->
 
 <section class="section lab">
   <div class="section-header">
@@ -841,9 +1050,8 @@ footer {
   </div>
 
   <p class="lab-intro">
-    A playground for visual ideas, campaign concepts,
-    social media experiments and creative explorations.
-    Not everything needs a brief.
+    A playground for visual ideas, campaign concepts, social media
+    experiments, and creative explorations. Not everything needs a brief.
   </p>
 
   <div class="lab-grid">
@@ -855,8 +1063,6 @@ footer {
     <div class="lab-item">JUST FOR FUN<br>06</div>
   </div>
 </section>
-
-<!-- ABOUT -->
 
 <section class="section" id="about">
   <div class="about-grid">
@@ -873,21 +1079,18 @@ footer {
 
     <div class="about-copy">
       <p>
-        Hi, I'm Yuke. A digital marketing professional
-        with a background in English translation and
-        international brand communication.
+        Hi, I'm Yolk. A digital marketing professional with a
+        background in English translation and international brand communication.
       </p>
 
       <p>
-        My experience spans global social media
-        management, paid media campaigns, content
-        development and creative production.
+        My experience spans global social media management,
+        paid media campaigns, content development and creative production.
       </p>
 
       <p>
-        I enjoy connecting strategy with creativity,
-        understanding audiences across markets and
-        turning ideas into meaningful results.
+        I enjoy connecting strategy with creativity, understanding
+        audiences across markets and turning ideas into meaningful results.
       </p>
 
       <div class="about-details">
@@ -909,10 +1112,8 @@ footer {
   </div>
 </section>
 
-<!-- CONTACT -->
-
 <section class="contact" id="contact">
-  <div class="section-index">06 / GET IN TOUCH</div>
+  <div class="contact-kicker">06 / GET IN TOUCH</div>
 
   <h2>
     LET'S MAKE<br>
@@ -926,19 +1127,130 @@ footer {
       I'd love to hear from you.
     </p>
 
-    <!-- Replace with your real email -->
-    <a class="contact-link"
-       href="mailto:YOUR_EMAIL@example.com">
+    <a class="contact-link" href="mailto:YOUR_EMAIL@example.com">
       SAY HELLO ↗
     </a>
   </div>
 </section>
 
 <footer>
-  <span>© 2026 YUKE®</span>
+  <span>© 2026 Yolk®</span>
   <span>INDEPENDENT DIGITAL MARKETING PORTFOLIO</span>
   <span>MADE WITH INTENTION.</span>
 </footer>
+
+<!-- PROJECT DETAIL POPUP -->
+
+<div class="modal" id="projectModal" aria-hidden="true">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+    <button class="modal-close" id="modalClose" aria-label="Close project details">×</button>
+
+    <div class="modal-kicker" id="modalCategory">PROJECT DETAILS</div>
+
+    <h2 class="modal-title" id="modalTitle">Project title</h2>
+
+    <p class="modal-copy" id="modalCopy"></p>
+
+    <p class="modal-hint">PROJECT CASE STUDY · MORE DETAILS COMING SOON</p>
+
+  </div>
+</div>
+
+<script>
+
+/* MOBILE NAVIGATION */
+
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  const opened = navLinks.classList.toggle('open');
+
+  menuToggle.setAttribute('aria-expanded', opened);
+  menuToggle.textContent = opened ? 'CLOSE −' : 'MENU +';
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.textContent = 'MENU +';
+  });
+});
+
+
+/* SCROLL REVEAL ANIMATION */
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: .12
+});
+
+document.querySelectorAll('.reveal').forEach(el => {
+  revealObserver.observe(el);
+});
+
+
+/* PROJECT DETAIL POPUP */
+
+const modal = document.getElementById('projectModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalCategory = document.getElementById('modalCategory');
+const modalCopy = document.getElementById('modalCopy');
+
+const closeModal = () => {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+};
+
+document.querySelectorAll('.project').forEach(project => {
+
+  const open = () => {
+    modalTitle.textContent = project.dataset.title;
+    modalCategory.textContent = project.dataset.category;
+    modalCopy.textContent = project.dataset.copy;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+
+    document.getElementById('modalClose').focus();
+  };
+
+  project.addEventListener('click', open);
+
+  project.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      open();
+    }
+  });
+
+});
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+
+modal.addEventListener('click', event => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+});
+
+</script>
 
 </body>
 </html>
