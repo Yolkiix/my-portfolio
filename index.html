@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yolk® — Magazine Portfolio</title>
-<meta name="description" content="Yolk® — global digital marketing, social media and creative portfolio, presented as four independent magazines.">
+<title>YOLK® — Magazine Portfolio</title>
+<meta name="description" content="YOLK® — global digital marketing, social media and creative portfolio, presented as four independent magazines.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
@@ -49,7 +49,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .cb{position:absolute;inset:0;background:#dad6ca;transform:rotateY(180deg);backface-visibility:hidden}
 .inner{inset:0;background:var(--paper);transform:translateZ(calc(var(--t)/2 - 1px));display:grid;place-items:center;font:10px var(--mono);letter-spacing:.12em;color:var(--mut)}
 .spine{top:0;bottom:0;width:var(--t);left:calc(var(--t)/-2);transform:rotateY(-90deg);display:flex;align-items:center;justify-content:center;overflow:hidden;background-image:linear-gradient(90deg,rgba(0,0,0,.35),transparent 40%,rgba(255,255,255,.12))}
-.spine span{writing-mode:vertical-rl;font:400 .6rem var(--sans);letter-spacing:.24em;white-space:nowrap;text-transform:uppercase}
+.spine{flex-direction:column;justify-content:space-between;padding:13px 0}
+.spine svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.spine .st{writing-mode:vertical-rl;font:400 .58rem var(--sans);letter-spacing:.2em;white-space:nowrap;text-transform:uppercase;min-height:0;overflow:hidden}
+.spine .sn{font:400 .55rem var(--mono);letter-spacing:.08em}
 .edge{top:3px;bottom:3px;width:var(--t);left:calc(100% - var(--t)/2);transform:rotateY(90deg);background:repeating-linear-gradient(90deg,#fff 0 1px,#d9d5c9 1px 2px)}
 .sd{position:absolute;left:10%;right:2%;bottom:-6px;height:22px;background:radial-gradient(ellipse at center,rgba(0,0,0,.5),transparent 70%);filter:blur(8px);transition:transform .6s,opacity .6s;opacity:.45}
 .mw.act:hover .sd{transform:scale(1.12,1.5) translateY(4px);opacity:.8}
@@ -401,6 +404,13 @@ const MAGS=[
  ]}
 ];
 
+/* Spine icons: 24x24 line icons, one per volume (edit the shapes here if you want different icons) */
+const ICONS={
+ social:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.6M8.2 13.2l7.6 4.6"/>',
+ paid:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
+ creative:'<path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8z"/><path d="M18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9z"/>',
+ brand:'<path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13"/>'
+};
 /* Text for the carousel caption and each volume's detail page (EDIT freely) */
 const META={
  social:{tag:'Platform operations, content and community',desc:'Six platform chapters on global social media management: channel operations, content strategy, community growth and campaign execution.'},
@@ -410,6 +420,20 @@ const META={
 };
 MAGS.forEach(m=>Object.assign(m,META[m.id],{note:'Edited by Yolk® — 2026'}));
 
+/* AUTO FILE NAMES: every empty media slot gets a default path like images/social-media/x-twitter-1.jpg.
+   Upload a file with exactly that name and it appears (jpg, png, webp are tried in turn). Missing files show the placeholder.
+   See ASSET-GUIDE.md for the full list. A path you type into D('...') yourself always wins. */
+const FOLDER={social:'social-media',paid:'paid-media',creative:'creative',brand:'brand-stories'};
+const LBL={paid:['Ads Manager screenshot','Ad creative example','Results chart'],creative:['Featured work','Detail or variation','Shown in context'],brand:['Key visual','Storyboard or still','Campaign visual']};
+MAGS.forEach(m=>m.ch.forEach(c=>{
+ const b=`images/${FOLDER[m.id]}/${c.n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}`;
+ if(LBL[m.id]&&c.g[0].l==='Account screenshot')c.g.forEach((d,k)=>d.l=LBL[m.id][k]);
+ c.g.forEach((d,k)=>{if(!d.s){d.s=`${b}-${k+1}.${/video example/i.test(d.l)?'mp4':'jpg'}`;d.auto=1}});
+ if(c.sp&&!c.sp.s){c.sp.s=`${b}-spread.jpg`;c.sp.auto=1}}));
+function mfail(el){const d=el.dataset,x=['jpg','png','webp'],m=el.src.match(/\.(\w+)$/);
+ if(el.tagName==='IMG'&&d.auto&&m){const i=x.indexOf(m[1].toLowerCase());if(i>=0&&i<x.length-1){el.src=el.src.replace(/\.\w+$/,'.'+x[i+1]);return}}
+ el.parentNode.innerHTML=`<div class="ph" style="--r:${d.r||'3/2'}"><span>${d.l||'Image'}<br>${(d.r||'').replace('/',':')} · add file</span></div>`}
+
 /* =============== page builders =============== */
 const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,'0');
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -417,14 +441,14 @@ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const cover=m=>`<div class="cv ${m.cls}"><div class="top"><span>Yolk®</span><span>Nº ${m.vol}</span></div><div class="ttl"><h3>${m.title}</h3></div><div class="bot"><span>${m.sub}</span><span>2026</span></div></div>`;
 
 function med(d){const v=/\.(mp4|webm)$/i.test(d.s);
- const inner=d.s?(v?`<video src="${d.s}" controls playsinline preload="metadata"></video>`:`<img src="${d.s}" alt="${d.l}" loading="lazy">`)
+ const inner=d.s?(v?`<video src="${d.s}" poster="${d.s.replace(/\.\w+$/,'-poster.jpg')}" controls playsinline preload="metadata" data-l="${d.l}" data-r="${d.r}" onerror="mfail(this)"></video>`:`<img src="${d.s}" alt="${d.l}" loading="lazy" data-l="${d.l}" data-r="${d.r}"${d.auto?' data-auto="1"':''} onerror="mfail(this)">`)
   :`<div class="ph" style="--r:${d.r}"><span>${d.l}<br>${d.r.replace('/',':')} · add file</span></div>`;
  return `<figure class="fig"><div class="m">${inner}</div><figcaption class="mono">${d.l}</figcaption></figure>`}
 const opener=(c,i,m)=>`<div class="pc op v${i%2}"><div class="mono k"><i></i>Chapter ${pad(i+1)} · ${m.sub}</div><div class="mk">${c.mk}</div><h2>${c.n}</h2><p class="tg">${c.t}</p><div class="fg">${med(c.g[0])}</div></div>`;
 const overview=(c,m)=>`<div class="pc"><div class="mono k"><i></i>Overview</div><p class="lead">${c.o}</p><div class="mets">${c.m.map(x=>`<div><b>${x[0]}</b><span class="mono">${x[1]}</span></div>`).join('')}</div><h4 class="mono">My responsibilities</h4><ul>${c.r.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
 const gallery=(c,i)=>`<div class="pc v${(i+1)%2}"><div class="mono k"><i></i>Content examples</div><div class="fg">${med(c.g[1])}${med(c.g[2])}</div></div>`;
 const text=c=>`<div class="pc"><div class="mono k"><i></i>Strategy &amp; execution</div><p class="lead">${c.s}</p><h4 class="mono">Selected achievements</h4><ul>${c.w.map(x=>`<li>${x}</li>`).join('')}</ul><blockquote class="pq">[Replace: a short quote or highlight line]</blockquote></div>`;
-const spread=(d,o)=>`<div class="spw"><div class="spi" style="--o:${o}">${d.s?`<img src="${d.s}" alt="${d.l}">`:`<div class="ph"><span>${d.l}<br>spans both pages · add file</span></div>`}</div></div>`;
+const spread=(d,o)=>`<div class="spw"><div class="spi" style="--o:${o}">${d.s?`<img src="${d.s}" alt="${d.l}" data-l="${d.l}" data-r="3/2"${d.auto?' data-auto="1"':''} onerror="mfail(this)">`:`<div class="ph"><span>${d.l}<br>spans both pages · add file</span></div>`}</div></div>`;
 
 function build(m){
  const p=[{h:cover(m),nf:1},null,null];
@@ -444,7 +468,7 @@ MAGS.forEach((m,i)=>books.insertAdjacentHTML('beforeend',`<div class="mw" data-i
  <div class="bk"><div class="sd"></div><button class="mag" aria-label="Volume ${m.vol}: ${m.sub}">
   <span class="face inner"></span>
   <span class="face front"><span class="cvw">${cover(m)}</span><span class="cb"></span></span>
-  <span class="face spine ${m.cls}"><span>Yolk® — ${m.vol} — ${m.sub}</span></span>
+  <span class="face spine ${m.cls}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[m.id]}</svg><span class="st">${m.sub}</span><span class="sn">${m.vol}</span></span>
   <span class="face edge"></span></button></div></div>`));
 /* MOTION MODULE: masked line reveals, staggered exits, pointer depth (all plain Web Animations API, no library) */
 const COUT='cubic-bezier(.33,1,.68,1)',CIN='cubic-bezier(.32,0,.67,0)';
